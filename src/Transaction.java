@@ -28,23 +28,23 @@ public class Transaction {
         }
     }
 
-    // Borrow a book and save the transaction
     public void borrowBook(Book book, Member member) {
-        if (book != null && member != null) {
+        if (book.getBorrower() == null) { // Ensure the book is not already borrowed
+            book.setBorrower(member); // Assign the borrower
             saveTransaction("Borrowed: " + book.getTitle() + " by " + member.getName());
             System.out.println("Transaction recorded: Borrowed " + book.getTitle());
         } else {
-            System.out.println("Invalid book or member for borrowing.");
+            System.out.println("Book is already borrowed by: " + book.getBorrower().getName());
         }
     }
 
-    // Return a book and save the transaction
     public void returnBook(Book book, Member member) {
-        if (book != null && member != null) {
+        if (book.getBorrower() != null && book.getBorrower().equals(member)) { // Ensure the correct member is returning
+            book.setBorrower(null); // Clear the borrower
             saveTransaction("Returned: " + book.getTitle() + " by " + member.getName());
             System.out.println("Transaction recorded: Returned " + book.getTitle());
         } else {
-            System.out.println("Invalid book or member for returning.");
+            System.out.println("Invalid return attempt. This book was not borrowed by " + member.getName());
         }
     }
 

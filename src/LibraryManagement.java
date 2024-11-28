@@ -64,6 +64,10 @@ public class LibraryManagement {
                     transaction.returnBook(returnBook, returnMember);
                     break;
 
+                case 5: // Show Borrowed Books
+                    library.showBorrowedBooks();
+                    break;
+
                 case 6: // View Transaction History
                     transaction.displayTransactionHistory();
                     break;

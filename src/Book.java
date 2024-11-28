@@ -28,6 +28,16 @@ public class Book {
             available = false;
         }
     }
+    private Member borrower; // Add this field to track the borrower
+
+    // Getter and Setter for borrower
+    public Member getBorrower() {
+        return borrower;
+    }
+
+    public void setBorrower(Member borrower) {
+        this.borrower = borrower;
+    }
 
     // Method to return the book
     public void returnBook() {

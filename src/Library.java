@@ -41,6 +41,23 @@ public class Library {
         }
         return null; // Not found
     }
+    public void showBorrowedBooks() {
+        for (Member member : members) {
+            System.out.println("Member: " + member.getName());
+            System.out.println("Borrowed Books:");
+            boolean hasBorrowedBooks = false;
+            for (Book book : books) {
+                if (book.getBorrower() != null && book.getBorrower().equals(member)) {
+                    System.out.println("- " + book.getTitle());
+                    hasBorrowedBooks = true;
+                }
+            }
+            if (!hasBorrowedBooks) {
+                System.out.println("No books borrowed.");
+            }
+            System.out.println(); // Separate each member's details
+        }
+    }
 
     // Find a book by ID
     public Book findBookById(int id) {
