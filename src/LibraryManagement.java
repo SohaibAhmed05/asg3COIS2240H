@@ -27,7 +27,9 @@ public class LibraryManagement {
                     scanner.nextLine(); // Consume newline
                     System.out.print("Enter Member Name: ");
                     String memberName = scanner.nextLine();
-                    library.addMember(new Member(memberId, memberName));
+                    if (!library.addMember(new Member(memberId, memberName))) {
+                        System.out.println("Failed to add member. Duplicate ID.");
+                    }
                     break;
 
                 case 2: // Add Book
@@ -36,8 +38,11 @@ public class LibraryManagement {
                     scanner.nextLine(); // Consume newline
                     System.out.print("Enter Book Title: ");
                     String bookTitle = scanner.nextLine();
-                    library.addBook(new Book(bookId, bookTitle));
+                    if (!library.addBook(new Book(bookId, bookTitle))) {
+                        System.out.println("Failed to add book. Duplicate ID.");
+                    }
                     break;
+
 
                 case 3: // Borrow Book
                     System.out.print("Enter Member ID: ");
