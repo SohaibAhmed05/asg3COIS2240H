@@ -27,9 +27,7 @@ public class LibraryManagement {
                     scanner.nextLine(); // Consume newline
                     System.out.print("Enter Member Name: ");
                     String memberName = scanner.nextLine();
-                    if (!library.addMember(new Member(memberId, memberName))) {
-                        System.out.println("Failed to add member. Duplicate ID.");
-                    }
+                    library.addMember(new Member(memberId, memberName));
                     break;
 
                 case 2: // Add Book
@@ -38,52 +36,39 @@ public class LibraryManagement {
                     scanner.nextLine(); // Consume newline
                     System.out.print("Enter Book Title: ");
                     String bookTitle = scanner.nextLine();
-                    if (!library.addBook(new Book(bookId, bookTitle))) {
-                        System.out.println("Failed to add book. Duplicate ID.");
-                    }
+                    library.addBook(new Book(bookId, bookTitle));
                     break;
 
                 case 3: // Borrow Book
                     System.out.print("Enter Member ID: ");
-                    int borrowerId = scanner.nextInt();
+                    int borrowMemberId = scanner.nextInt();
                     System.out.print("Enter Book ID: ");
-                    int borrowedBookId = scanner.nextInt();
-                    Member borrower = library.findMemberById(borrowerId);
-                    Book borrowedBook = library.findBookById(borrowedBookId);
-
-                    if (borrower != null && borrowedBook != null) {
-                        transaction.borrowBook(borrowedBook, borrower);
-                    } else {
-                        System.out.println("Invalid Member or Book ID.");
-                    }
+                    int borrowBookId = scanner.nextInt();
+                    Member borrowMember = library.findMemberById(borrowMemberId);
+                    Book borrowBook = library.findBookById(borrowBookId);
+                    transaction.borrowBook(borrowBook, borrowMember);
                     break;
 
                 case 4: // Return Book
                     System.out.print("Enter Member ID: ");
-                    int returnerId = scanner.nextInt();
+                    int returnMemberId = scanner.nextInt();
                     System.out.print("Enter Book ID: ");
-                    int returnedBookId = scanner.nextInt();
-                    Member returner = library.findMemberById(returnerId);
-                    Book returnedBook = library.findBookById(returnedBookId);
-
-                    if (returner != null && returnedBook != null) {
-                        transaction.returnBook(returnedBook, returner);
-                    } else {
-                        System.out.println("Invalid Member or Book ID.");
-                    }
+                    int returnBookId = scanner.nextInt();
+                    Member returnMember = library.findMemberById(returnMemberId);
+                    Book returnBook = library.findBookById(returnBookId);
+                    transaction.returnBook(returnBook, returnMember);
                     break;
 
                 case 6: // View Transaction History
                     transaction.displayTransactionHistory();
                     break;
 
-                case 0: // Exit
+                case 0:
                     System.out.println("Exiting system...");
                     break;
 
                 default:
                     System.out.println("Invalid option. Try again.");
-                    break;
             }
         } while (option != 0);
 

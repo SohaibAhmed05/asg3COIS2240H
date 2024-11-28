@@ -10,7 +10,7 @@ public class Transaction {
     // Private constructor for Singleton
     private Transaction() {}
 
-    // Singleton method to get instance
+    // Singleton method to get the single instance
     public static Transaction getInstance() {
         if (instance == null) {
             instance = new Transaction();
@@ -18,37 +18,16 @@ public class Transaction {
         return instance;
     }
 
-    // Save transaction details to a file
-    public void saveTransaction(String transactionDetails) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.txt", true))) {
-            writer.write(transactionDetails);
-            writer.newLine();
-        } catch (IOException e) {
-            System.out.println("Error writing to transactions file: " + e.getMessage());
-        }
-    }
-
-    // Display transaction history
-    public void displayTransactionHistory() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("transactions.txt"))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
-            }
-        } catch (IOException e) {
-            System.out.println("No transaction history available.");
-        }
-    }
-
-    // Example method for borrowing a book
+    // Placeholder method for borrowing a book
     public void borrowBook(Book book, Member member) {
-        // Simulate borrowing logic
-        saveTransaction("Borrowed: " + book.getTitle() + " by " + member.getName());
+        System.out.println("Book borrowed: " + book.getTitle() + " by " + member.getName());
     }
 
-    // Example method for returning a book
+    // Placeholder method for returning a book
     public void returnBook(Book book, Member member) {
-        // Simulate returning logic
-        saveTransaction("Returned: " + book.getTitle() + " by " + member.getName());
+        System.out.println("Book returned: " + book.getTitle() + " by " + member.getName());
+    }
+
+    public void displayTransactionHistory() {
     }
 }
