@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -18,14 +16,34 @@ public class Transaction {
         return instance;
     }
 
-    // Placeholder method for borrowing a book
-    public void borrowBook(Book book, Member member) {
-        System.out.println("Book borrowed: " + book.getTitle() + " by " + member.getName());
+    // Save transaction details to a file
+    public void saveTransaction(String transactionDetails) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("transactions.txt", true))) {
+            writer.write(transactionDetails);
+            writer.newLine();
+        } catch (IOException e) {
+            System.out.println("Error saving transaction: " + e.getMessage());
+        }
     }
 
-    // Placeholder method for returning a book
+    // Borrow a book and save the transaction
+    public void borrowBook(Book book, Member member) {
+        if (book != null && member != null) {
+            saveTransaction("Borrowed: " + book.getTitle() + " by " + member.getName());
+            System.out.println("Transaction recorded: Borrowed " + book.getTitle());
+        } else {
+            System.out.println("Invalid book or member for borrowing.");
+        }
+    }
+
+    // Return a book and save the transaction
     public void returnBook(Book book, Member member) {
-        System.out.println("Book returned: " + book.getTitle() + " by " + member.getName());
+        if (book != null && member != null) {
+            saveTransaction("Returned: " + book.getTitle() + " by " + member.getName());
+            System.out.println("Transaction recorded: Returned " + book.getTitle());
+        } else {
+            System.out.println("Invalid book or member for returning.");
+        }
     }
 
     public void displayTransactionHistory() {
