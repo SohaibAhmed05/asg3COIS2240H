@@ -1,4 +1,6 @@
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -46,6 +48,16 @@ public class Transaction {
         }
     }
 
+    // Display transaction history from the file
     public void displayTransactionHistory() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("transactions.txt"))) {
+            System.out.println("Transaction History:");
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            System.out.println("No transaction history available or error reading file.");
+        }
     }
 }
