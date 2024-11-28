@@ -1,1 +1,5 @@
-Borrowed: Ethics by Joe
+Borrowed: Programming by George
+Borrowed: Math by George
+Borrowed: AI by Anne
+Returned: Math by George
+Borrowed: Math by Anne
