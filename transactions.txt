@@ -3,3 +3,8 @@ Borrowed: Math by George
 Borrowed: AI by Anne
 Returned: Math by George
 Borrowed: Math by Anne
+Borrowed: Programming by George
+Borrowed: Programming by George
+Borrowed: Programming by George
+Borrowed: Programming by George
+Returned: Programming by George

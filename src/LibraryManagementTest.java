@@ -26,4 +26,34 @@ public class LibraryManagementTest {
             assertEquals("Invalid Book ID: ID must be between 100 and 999.", e.getMessage());
         }
     }
+    @Test
+    public void testBorrowReturn() throws Exception {
+        Book book = new Book(100, "Programming");
+        Member member = new Member(1111, "George");
+        Transaction transaction = Transaction.getInstance();
+
+        // Borrow book
+        transaction.borrowBook(book, member);
+        assertFalse(book.isAvailable()); // Book should be unavailable
+
+        // Try borrowing again (should fail)
+        try {
+            transaction.borrowBook(book, member);
+            fail("Exception was expected for borrowing an unavailable book.");
+        } catch (Exception e) {
+            assertEquals("Book is not available for borrowing.", e.getMessage());
+        }
+
+        // Return book
+        transaction.returnBook(book, member);
+        assertTrue(book.isAvailable()); // Book should be available again
+
+        // Try returning again (should fail)
+        try {
+            transaction.returnBook(book, member);
+            fail("Exception was expected for returning a book not borrowed.");
+        } catch (Exception e) {
+            assertEquals("Book was not borrowed by the member.", e.getMessage());
+        }
+    }
 }

@@ -29,22 +29,26 @@ public class Transaction {
     }
 
     public void borrowBook(Book book, Member member) {
-        if (book.getBorrower() == null) { // Ensure the book is not already borrowed
+        if (book.isAvailable()) { // Check if the book is available
             book.setBorrower(member); // Assign the borrower
+            book.borrowBook(); // Set the book as unavailable
             saveTransaction("Borrowed: " + book.getTitle() + " by " + member.getName());
             System.out.println("Transaction recorded: Borrowed " + book.getTitle());
         } else {
             System.out.println("Book is already borrowed by: " + book.getBorrower().getName());
+            throw new IllegalStateException("Book is not available for borrowing."); // Throw an exception for test
         }
     }
 
     public void returnBook(Book book, Member member) {
         if (book.getBorrower() != null && book.getBorrower().equals(member)) { // Ensure the correct member is returning
             book.setBorrower(null); // Clear the borrower
+            book.returnBook(); // Set the book as available
             saveTransaction("Returned: " + book.getTitle() + " by " + member.getName());
             System.out.println("Transaction recorded: Returned " + book.getTitle());
         } else {
             System.out.println("Invalid return attempt. This book was not borrowed by " + member.getName());
+            throw new IllegalStateException("Book was not borrowed by the member."); // Throw an exception for test
         }
     }
 

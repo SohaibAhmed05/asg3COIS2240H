@@ -38,16 +38,19 @@ public class Book {
     // Method to borrow the book
     public void borrowBook() {
         if (available) {
-            available = false;
+            available = false; //book availability
         }
     }
 
     // Method to return the book
     public void returnBook() {
-        available = true;
+        if (!available) {
+            available = true; // book availability
+        }
     }
 
-    // Method to check if a book ID is valid
+
+    // Method book id check
     public boolean isValidId(int id) {
         return id >= 100 && id <= 999;
     }
