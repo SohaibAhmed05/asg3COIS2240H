@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class LibraryManagement {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Library library = new Library();
         Transaction transaction = Transaction.getInstance(); // Use Singleton instance
 

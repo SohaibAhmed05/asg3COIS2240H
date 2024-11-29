@@ -2,8 +2,12 @@ public class Book {
     private int id;
     private String title;
     private boolean available;
+    private Member borrower; // track the borrower
 
-    public Book(int id, String title) {
+    public Book(int id, String title) throws Exception {
+        if (!isValidId(id)) {
+            throw new Exception("Invalid Book ID: ID must be between 100 and 999.");
+        }
         this.id = id;
         this.title = title;
         this.available = true;
@@ -22,14 +26,6 @@ public class Book {
         return available;
     }
 
-    // Method to borrow the book
-    public void borrowBook() {
-        if (available) {
-            available = false;
-        }
-    }
-    private Member borrower; // Add this field to track the borrower
-
     // Getter and Setter for borrower
     public Member getBorrower() {
         return borrower;
@@ -39,12 +35,19 @@ public class Book {
         this.borrower = borrower;
     }
 
+    // Method to borrow the book
+    public void borrowBook() {
+        if (available) {
+            available = false;
+        }
+    }
+
     // Method to return the book
     public void returnBook() {
         available = true;
     }
 
-    // Method to check if a book id is valid
+    // Method to check if a book ID is valid
     public boolean isValidId(int id) {
         return id >= 100 && id <= 999;
     }
