@@ -8,3 +8,10 @@ Borrowed: Programming by George
 Borrowed: Programming by George
 Borrowed: Programming by George
 Returned: Programming by George
+Borrowed: Programming by George
+Returned: Programming by George
+Borrowed: Programming by George
+Returned: Programming by George
+Borrowed: Smith by Joe
+Borrowed: Programming by George
+Returned: Programming by George

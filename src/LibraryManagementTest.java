@@ -1,4 +1,8 @@
 import org.junit.Test;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Modifier;
+
 import static org.junit.Assert.*;
 
 public class LibraryManagementTest {
@@ -27,32 +31,45 @@ public class LibraryManagementTest {
         }
     }
     @Test
+    public void testSingletonTransaction() throws Exception {
+        Transaction instance1 = Transaction.getInstance();
+        Transaction instance2 = Transaction.getInstance();
+        assertSame(instance1, instance2);
+
+
+        Constructor<Transaction> constructor = Transaction.class.getDeclaredConstructor();
+        assertTrue(Modifier.isPrivate(constructor.getModifiers()));
+    }
+    @Test
     public void testBorrowReturn() throws Exception {
+        // Create a book and a member
         Book book = new Book(100, "Programming");
         Member member = new Member(1111, "George");
+
+        // Get Transaction Singleton instance
         Transaction transaction = Transaction.getInstance();
 
-        // Borrow book
+        // Borrow the book
         transaction.borrowBook(book, member);
-        assertFalse(book.isAvailable()); // Book should be unavailable
+        assertFalse(book.isAvailable()); // Book should now be unavailable
 
         // Try borrowing again (should fail)
         try {
             transaction.borrowBook(book, member);
             fail("Exception was expected for borrowing an unavailable book.");
-        } catch (Exception e) {
+        } catch (IllegalStateException e) {
             assertEquals("Book is not available for borrowing.", e.getMessage());
         }
 
-        // Return book
+        // Return the book
         transaction.returnBook(book, member);
-        assertTrue(book.isAvailable()); // Book should be available again
+        assertTrue(book.isAvailable()); // Book should now be available
 
         // Try returning again (should fail)
         try {
             transaction.returnBook(book, member);
             fail("Exception was expected for returning a book not borrowed.");
-        } catch (Exception e) {
+        } catch (IllegalStateException e) {
             assertEquals("Book was not borrowed by the member.", e.getMessage());
         }
     }
